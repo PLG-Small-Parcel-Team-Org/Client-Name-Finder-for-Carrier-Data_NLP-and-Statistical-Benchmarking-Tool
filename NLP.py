@@ -16,12 +16,13 @@ def get_similarity_by_n_grams(left, right, n):
 input1 = ["P. Poll", "Petal & Cat", "Nuckerruck", "Princess Shiane"]
 input2 = ["Polly P."]
 
-rows = []
+final_rows = []
 
-for client1 in input1:
-    row = []
+for client1 in input2:
+    rows = []
 
-    for client2 in input2:
+    for client2 in input1:
+        row = []
         sequence1 = set(client1)
         sequence2 = set(client2)
 
@@ -31,5 +32,8 @@ for client1 in input1:
 
         rows.append(row)
 
-rows.sort(key = lambda row: row[2])
-print(rows[-1])
+    rows.sort(key = lambda row: row[2])
+    final_rows.append(rows[-1])
+    final_rows.sort(key=lambda row: row[2])
+
+print(final_rows)
