@@ -39,4 +39,6 @@ for client1 in input2:
     final_rows.append(rows[-1])
     final_rows.sort(key=lambda row: row[2])
 
-print(final_rows)
+for row in final_rows:
+
+    final_df = pd.DataFrame(final_rows, columns = ["Client Name", "Closest Client Name", "Similarity", "Volume"])
