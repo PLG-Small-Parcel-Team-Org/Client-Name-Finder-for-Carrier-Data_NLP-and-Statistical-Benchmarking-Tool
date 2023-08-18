@@ -17,7 +17,7 @@ def get_similarity_by_n_grams(left, right, n):
     similarity = 1 - jaccard_distance(seq1, seq2)
 
 # Create row function to find most similar client
-def create_row(client1, client2, df):
+def create_row(client1, client2, df, client_column_name):
     row = []
     sequence1 = set(client1)
     sequence2 = set(client2)
@@ -25,7 +25,7 @@ def create_row(client1, client2, df):
     row.append(client1)
     row.append(client2)
     row.append(jaccard_similarity(sequence1, sequence2))
-    row.append(df["SHPCO"].value_counts()[client1])
+    row.append(df[client_column_name].value_counts()[client1])
 
     return row
 
