@@ -53,3 +53,26 @@ for client1 in input2:
 # Append final_rows with the Most compatible collection of data
     final_rows.append(rows[-1])
     final_rows.sort(key=lambda row: row[2])
+
+# for loop to turn final_rows lsit into dataframe
+for row in final_rows:
+
+    final_df = pd.DataFrame(final_rows, columns = ["Client Name", "Closest Client Name", "Similarity", "Volume"])
+
+#final_df.loc[final_df['Volume'] >= 5, 'Is Client'] = "Yes"
+final_df['Is Client'] = np.where(final_df.Volume >= 5,'Yes','No')
+final_df.loc[final_df['Similarity'] == 1 , 'Is Client'] = "Yes"
+
+# Test, Train Split data
+X = final_df[['Similarity', 'Volume']]
+
+y = final_df['Is Client']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=100)
+
+# Fit the data
+clf = SVC(kernel='linear')
+clf.fit(X_train, y_train)
+
+# Create Predictions
+predictions = clf.predict(X_test)
